@@ -335,31 +335,31 @@
         <div class="progress-section">
             <h2 class="progress-title">Weekly Overview</h2>
             <div class="weekly-grid">
-                <div class="day-card" onclick="showDay(0)">
+                <div class="day-card" onclick="showDay(1)">
                     <div class="day-name">MON</div>
                     <div class="day-type">Upper Body</div>
                 </div>
-                <div class="day-card" onclick="showDay(1)">
+                <div class="day-card" onclick="showDay(2)">
                     <div class="day-name">TUE</div>
                     <div class="day-type">Cardio</div>
                 </div>
-                <div class="day-card" onclick="showDay(2)">
+                <div class="day-card" onclick="showDay(3)">
                     <div class="day-name">WED</div>
                     <div class="day-type">Circuit</div>
                 </div>
-                <div class="day-card" onclick="showDay(3)">
+                <div class="day-card" onclick="showDay(4)">
                     <div class="day-name">THU</div>
                     <div class="day-type">Upper Body</div>
                 </div>
-                <div class="day-card" onclick="showDay(4)">
+                <div class="day-card" onclick="showDay(5)">
                     <div class="day-name">FRI</div>
                     <div class="day-type">Cardio</div>
                 </div>
-                <div class="day-card" onclick="showDay(5)">
+                <div class="day-card" onclick="showDay(6)">
                     <div class="day-name">SAT</div>
                     <div class="day-type">Circuit</div>
                 </div>
-                <div class="day-card rest-day" onclick="showDay(6)">
+                <div class="day-card rest-day" onclick="showDay(0)">
                     <div class="day-name">SUN</div>
                     <div class="day-type">Recovery</div>
                 </div>
@@ -373,7 +373,7 @@
 
     <script>
         const workoutProgram = {
-            0: { // Monday
+            1: { // Monday
                 type: "Upper Body Focus",
                 exercises: [
                     "Warm-up: 2 minutes light movement",
@@ -389,7 +389,7 @@
                     "Stay hydrated throughout the day"
                 ]
             },
-            1: { // Tuesday
+            2: { // Tuesday
                 type: "Cardio Focus",
                 exercises: [
                     "2 minutes easy warm-up pace",
@@ -404,7 +404,7 @@
                     "Recovery snack with protein & carbs"
                 ]
             },
-            2: { // Wednesday
+            3: { // Wednesday
                 type: "Combined Circuit",
                 exercises: [
                     "3 rounds of circuit:",
@@ -420,7 +420,7 @@
                     "Focus on recovery nutrition after"
                 ]
             },
-            3: { // Thursday
+            4: { // Thursday
                 type: "Upper Body Focus",
                 exercises: [
                     "Warm-up: 2 minutes light movement",
@@ -436,7 +436,7 @@
                     "Post-workout protein is crucial"
                 ]
             },
-            4: { // Friday
+            5: { // Friday
                 type: "Cardio Focus",
                 exercises: [
                     "2 minutes easy warm-up pace",
@@ -451,7 +451,7 @@
                     "Celebrate weekly progress!"
                 ]
             },
-            5: { // Saturday
+            6: { // Saturday
                 type: "Combined Circuit",
                 exercises: [
                     "3 rounds of circuit:",
@@ -467,7 +467,7 @@
                     "Prepare healthy snacks"
                 ]
             },
-            6: { // Sunday
+            0: { // Sunday
                 type: "Active Recovery",
                 exercises: [
                     "15 minutes very light rowing",
