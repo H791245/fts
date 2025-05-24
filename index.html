@@ -150,6 +150,53 @@
             border-radius: 10px;
             border-left: 4px solid #4c6ef5;
             font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .exercise-item:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateX(5px);
+        }
+
+        .exercise-detail {
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #f093fb;
+            display: none;
+        }
+
+        .exercise-detail.show {
+            display: block;
+        }
+
+        .exercise-detail h4 {
+            color: #4c6ef5;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .exercise-detail p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .exercise-tips {
+            background: rgba(76, 110, 245, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .exercise-tips strong {
+            color: #4c6ef5;
+        }
+
+        .exercise-tips ul {
+            margin-left: 20px;
+            margin-top: 5px;
         }
 
         .diet-section {
@@ -372,15 +419,53 @@
     </div>
 
     <script>
+        const exerciseDetails = {
+            "chest_press": {
+                title: "Dumbbell Chest Press",
+                description: "Lie on your back on a bench or floor. Hold dumbbells at chest level with arms bent 90°. Press weights up until arms are straight, then slowly lower back to starting position. Keep your core tight and don't arch your back excessively.",
+                tips: ["Keep wrists straight", "Control the descent", "Breathe out on the press up"]
+            },
+            "bent_rows": {
+                title: "Bent-Over Dumbbell Rows",
+                description: "Stand with feet hip-width apart, knees slightly bent. Hinge at hips to lean forward 45°, keeping back straight. Hold dumbbells with arms hanging down. Pull weights to your ribs, squeezing shoulder blades together, then slowly lower.",
+                tips: ["Keep core engaged", "Don't round your back", "Lead with your elbows"]
+            },
+            "shoulder_press": {
+                title: "Dumbbell Shoulder Press",
+                description: "Sit or stand with dumbbells at shoulder height, palms facing forward. Press weights straight up overhead until arms are extended, then slowly lower back to start. Keep your core tight throughout the movement.",
+                tips: ["Don't press behind your head", "Keep movements controlled", "Engage your core"]
+            },
+            "rowing": {
+                title: "Rowing Machine Technique",
+                description: "Sit tall with knees bent, feet in straps. Grab handle with overhand grip. Drive through legs first, then lean back slightly and pull handle to lower ribs. Reverse the motion: arms first, then body, then legs.",
+                tips: ["Legs-body-arms on the pull", "Arms-body-legs on the return", "Keep shoulders relaxed"]
+            },
+            "push_ups": {
+                title: "Modified Push-ups (Knee)",
+                description: "Start on hands and knees, hands slightly wider than shoulders. Keep straight line from head to knees. Lower chest toward floor by bending arms, then push back up to starting position.",
+                tips: ["Keep core engaged", "Don't let hips sag", "Control both up and down"]
+            },
+            "warm_up": {
+                title: "Dynamic Warm-up",
+                description: "Start with arm circles (10 each direction), shoulder rolls (10 backward), gentle torso twists (10 each side), and marching in place (30 seconds). This prepares your muscles and joints for exercise.",
+                tips: ["Start slowly", "Increase range gradually", "Focus on movement quality"]
+            },
+            "stretching": {
+                title: "Cool-down Stretches",
+                description: "Hold each stretch for 20-30 seconds: Chest stretch (doorway stretch), shoulder rolls, gentle spinal twists, and cat-cow stretches for your back. Breathe deeply during each stretch.",
+                tips: ["Never force a stretch", "Breathe deeply", "Hold steady, don't bounce"]
+            }
+        };
+
         const workoutProgram = {
             1: { // Monday
                 type: "Upper Body Focus",
                 exercises: [
-                    "Warm-up: 2 minutes light movement",
-                    "Chest press: 3 sets × 8-10 reps (8-10kg)",
-                    "Bent-over rows: 3 sets × 8-10 reps",
-                    "Shoulder press: 2 sets × 8-10 reps",
-                    "Cool-down: 2 minutes stretching"
+                    { key: "warm_up", text: "Warm-up: 2 minutes dynamic movement" },
+                    { key: "chest_press", text: "Chest press: 3 sets × 8-10 reps (8-10kg)" },
+                    { key: "bent_rows", text: "Bent-over rows: 3 sets × 8-10 reps" },
+                    { key: "shoulder_press", text: "Shoulder press: 2 sets × 8-10 reps" },
+                    { key: "stretching", text: "Cool-down: 2 minutes stretching" }
                 ],
                 diet: [
                     "Start with protein-rich breakfast",
@@ -392,10 +477,10 @@
             2: { // Tuesday
                 type: "Cardio Focus",
                 exercises: [
-                    "2 minutes easy warm-up pace",
-                    "10 minutes steady rowing (moderate intensity)",
-                    "3 minutes cool-down pace",
-                    "Light stretching: 2 minutes"
+                    { key: "rowing", text: "2 minutes easy warm-up pace" },
+                    { key: "rowing", text: "10 minutes steady rowing (moderate intensity)" },
+                    { key: "rowing", text: "3 minutes cool-down pace" },
+                    { key: "stretching", text: "Light stretching: 2 minutes" }
                 ],
                 diet: [
                     "Focus on complex carbs for energy",
@@ -407,11 +492,11 @@
             3: { // Wednesday
                 type: "Combined Circuit",
                 exercises: [
-                    "3 rounds of circuit:",
-                    "• 2 minutes rowing",
-                    "• 10 push-ups (on knees)",
-                    "• 10 dumbbell chest press",
-                    "• 1 minute rest between rounds"
+                    { key: "circuit", text: "3 rounds of circuit:" },
+                    { key: "rowing", text: "• 2 minutes rowing" },
+                    { key: "push_ups", text: "• 10 push-ups (on knees)" },
+                    { key: "chest_press", text: "• 10 dumbbell chest press" },
+                    { key: "rest", text: "• 1 minute rest between rounds" }
                 ],
                 diet: [
                     "Balanced meals with lean protein",
@@ -423,11 +508,11 @@
             4: { // Thursday
                 type: "Upper Body Focus",
                 exercises: [
-                    "Warm-up: 2 minutes light movement",
-                    "Chest press: 3 sets × 8-10 reps (8-10kg)",
-                    "Bent-over rows: 3 sets × 8-10 reps",
-                    "Shoulder press: 2 sets × 8-10 reps",
-                    "Cool-down: 2 minutes stretching"
+                    { key: "warm_up", text: "Warm-up: 2 minutes dynamic movement" },
+                    { key: "chest_press", text: "Chest press: 3 sets × 8-10 reps (8-10kg)" },
+                    { key: "bent_rows", text: "Bent-over rows: 3 sets × 8-10 reps" },
+                    { key: "shoulder_press", text: "Shoulder press: 2 sets × 8-10 reps" },
+                    { key: "stretching", text: "Cool-down: 2 minutes stretching" }
                 ],
                 diet: [
                     "Protein-rich meals for muscle recovery",
@@ -439,10 +524,10 @@
             5: { // Friday
                 type: "Cardio Focus",
                 exercises: [
-                    "2 minutes easy warm-up pace",
-                    "10 minutes steady rowing (moderate intensity)",
-                    "3 minutes cool-down pace",
-                    "Light stretching: 2 minutes"
+                    { key: "rowing", text: "2 minutes easy warm-up pace" },
+                    { key: "rowing", text: "10 minutes steady rowing (moderate intensity)" },
+                    { key: "rowing", text: "3 minutes cool-down pace" },
+                    { key: "stretching", text: "Light stretching: 2 minutes" }
                 ],
                 diet: [
                     "Carb-loading for weekend energy",
@@ -454,11 +539,11 @@
             6: { // Saturday
                 type: "Combined Circuit",
                 exercises: [
-                    "3 rounds of circuit:",
-                    "• 2 minutes rowing",
-                    "• 10 push-ups (on knees)",
-                    "• 10 dumbbell chest press",
-                    "• 1 minute rest between rounds"
+                    { key: "circuit", text: "3 rounds of circuit:" },
+                    { key: "rowing", text: "• 2 minutes rowing" },
+                    { key: "push_ups", text: "• 10 push-ups (on knees)" },
+                    { key: "chest_press", text: "• 10 dumbbell chest press" },
+                    { key: "rest", text: "• 1 minute rest between rounds" }
                 ],
                 diet: [
                     "Weekend meal prep day",
@@ -470,10 +555,10 @@
             0: { // Sunday
                 type: "Active Recovery",
                 exercises: [
-                    "15 minutes very light rowing",
-                    "Focus on stretching routine",
-                    "Back and chest stretches",
-                    "Relaxation and mobility work"
+                    { key: "rowing", text: "15 minutes very light rowing" },
+                    { key: "stretching", text: "Focus on stretching routine" },
+                    { key: "stretching", text: "Back and chest stretches" },
+                    { key: "stretching", text: "Relaxation and mobility work" }
                 ],
                 diet: [
                     "Plan next week's meals",
@@ -519,9 +604,26 @@
                     <div class="workout-card">
                         <h3 class="workout-title">🏋️ ${dayProgram.type}</h3>
                         <ul class="exercise-list">
-                            ${dayProgram.exercises.map(exercise => 
-                                `<li class="exercise-item">${exercise}</li>`
-                            ).join('')}
+                            ${dayProgram.exercises.map((exercise, index) => {
+                                const detailKey = exercise.key || 'general';
+                                const detail = exerciseDetails[detailKey];
+                                return `
+                                    <li class="exercise-item" onclick="toggleExerciseDetail(${dayIndex}, ${index})">
+                                        ${exercise.text || exercise}
+                                        ${detail ? `
+                                        <div class="exercise-detail" id="detail-${dayIndex}-${index}">
+                                            <h4>${detail.title}</h4>
+                                            <p>${detail.description}</p>
+                                            <div class="exercise-tips">
+                                                <strong>💡 Tips:</strong>
+                                                <ul>
+                                                    ${detail.tips.map(tip => `<li>${tip}</li>`).join('')}
+                                                </ul>
+                                            </div>
+                                        </div>` : ''}
+                                    </li>
+                                `;
+                            }).join('')}
                         </ul>
                     </div>
                     <div class="workout-card">
@@ -545,6 +647,13 @@
 
             // Update quote
             document.getElementById('dailyQuote').textContent = motivationalQuotes[dayIndex];
+        }
+
+        function toggleExerciseDetail(dayIndex, exerciseIndex) {
+            const detailElement = document.getElementById(`detail-${dayIndex}-${exerciseIndex}`);
+            if (detailElement) {
+                detailElement.classList.toggle('show');
+            }
         }
 
         // Initialize with current day
